@@ -23,6 +23,7 @@ body {
     sans-serif;
   background: var(--bg-secondary);
   color: var(--text-primary);
+  white-space: pre-line;
 }
 
 .app {
