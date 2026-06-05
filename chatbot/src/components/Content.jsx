@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { pages } from "../data";
 
 function Block({ block }) {
@@ -94,18 +95,15 @@ function Block({ block }) {
         </div>
       );
     }
-
+    // faqs 수정
     case "faqs":
       return (
         <div>
           {block.items.map((item, i) => (
-            <div className="faq-item" key={i}>
-              <div className="faq-q">Q. {item.q}</div>
-              <div className="faq-a">{item.a}</div>
-            </div>
+            <FaqItem q={item.q} a={item.a} key={i} />
           ))}
         </div>
-      );
+  );
 
     default:
       return null;
@@ -124,5 +122,29 @@ export default function Content({ pageId }) {
       {page.blocks &&
         page.blocks.map((block, i) => <Block block={block} key={i} />)}
     </main>
+  );
+}
+
+//faq 질문 
+function FaqItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="faq-acc">
+      <button
+        className={`faq-acc-q ${open ? "open" : ""}`}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span>
+          <span className="faq-q-mark">Q.</span>
+          {q}
+        </span>
+        <i className="ti ti-chevron-down" aria-hidden="true" />
+      </button>
+      <div className={`faq-acc-a-wrap ${open ? "open" : ""}`}>
+        <div className="faq-acc-a-inner">
+          <div className="faq-acc-a">{a}</div>
+        </div>
+      </div>
+    </div>
   );
 }

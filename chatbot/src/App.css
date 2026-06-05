@@ -280,16 +280,58 @@ body {
   line-height: 1.7;
 }
 
-.faq-item {
-  margin-bottom: 16px;
+/* faqs 수정 */
+.faq-acc {
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  margin-top: 10px;
+  overflow: hidden;
+  white-space: pre-line;
 }
-.faq-q {
+.faq-acc-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: var(--bg-primary);
+  font-family: inherit;
+  text-align: left;
+  padding: 13px 16px;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 5px;
+  cursor: pointer;
 }
-.faq-a {
+.faq-acc-q:hover {
+  background: var(--bg-secondary);
+}
+.faq-acc-q .ti {
+  color: var(--accent-dark);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+.faq-acc-q.open .ti {
+  transform: rotate(180deg);
+}
+.faq-q-mark {
+  color: var(--accent-dark);
+  margin-right: 6px;
+}
+.faq-acc-a-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.faq-acc-a-wrap.open {
+  grid-template-rows: 1fr;
+}
+.faq-acc-a-inner {
+  overflow: hidden;
+}
+.faq-acc-a {
+  padding: 0 16px 14px;
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.7;
@@ -356,3 +398,4 @@ body {
   padding: 10px 13px;
   margin-top: 10px;
 }
+
