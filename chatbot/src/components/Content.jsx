@@ -60,7 +60,7 @@ function Block({ block }) {
           </div>
           {block.duty && (
             <>
-              <div className="org-duty-label">주요 수행업무</div>
+              {/* <div className="org-duty-label">주요 수행업무</div> */}
               <div className="org-duty">{block.duty}</div>
             </>
           )}

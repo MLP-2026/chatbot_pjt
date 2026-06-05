@@ -314,6 +314,7 @@ body {
   border-radius: var(--radius-lg);
   padding: 16px 18px;
   margin-top: 14px;
+  white-space: pre-line;
 }
 .org-head {
   display: flex;
@@ -353,4 +354,5 @@ body {
   background: var(--bg-secondary);
   border-radius: var(--radius);
   padding: 10px 13px;
+  margin-top: 10px;
 }
