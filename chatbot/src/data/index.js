@@ -13,9 +13,11 @@ import { section3Menu, section3Pages } from "./section3";
 import { section4Menu, section4Pages } from "./section4";
 
 // ---- 사이드바 상단 표시 정보 ----
-export const appTitle = "한 눈에 보는 직업능력개발훈련";
-export const appSubtitle = "원격훈련과정";
-export const lastUpdated = "2026-05-29"; // 최근 업데이트 날짜 (yyyy-mm-dd)
+export const appTitle = "직업능력개발훈련";
+export const appSubtitle = "원격훈련과정-MULTICAMPUS";
+// 최근 업데이트 날짜 (yyyy-mm-dd)
+export const lastUpdated = "2026-06-29"; 
+
 
 // ---- 메뉴 통합 (사이드바에 표시되는 순서대로) ----
 export const menu = [

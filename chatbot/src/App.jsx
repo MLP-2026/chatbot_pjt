@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Sidebar from "./components/Sidebar";
 import Content from "./components/Content";
+import Chatbot from "./components/Chatbot";
 import { menu } from "./data";
 import "./App.css";
 
@@ -23,6 +24,8 @@ export default function App() {
         <Sidebar activePage={activePage} onSelect={setActivePage} />
         <Content pageId={activePage} />
       </div>
+      {/* 화면 오른쪽 아래 떠있는 챗봇 */}
+      <Chatbot onSelect={setActivePage} />
     </div>
   );
 }

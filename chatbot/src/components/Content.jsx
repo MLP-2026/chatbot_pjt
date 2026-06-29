@@ -1,6 +1,30 @@
 import { useState } from "react";
 import { pages } from "../data";
 
+// FAQ 한 항목 (클릭하면 펼쳐지는 아코디언)
+function FaqItem({ q, a }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="faq-acc">
+      <button
+        className={`faq-acc-q ${open ? "open" : ""}`}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span>
+          <span className="faq-q-mark">Q.</span>
+          {q}
+        </span>
+        <i className="ti ti-chevron-down" aria-hidden="true" />
+      </button>
+      <div className={`faq-acc-a-wrap ${open ? "open" : ""}`}>
+        <div className="faq-acc-a-inner">
+          <div className="faq-acc-a">{a}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Block({ block }) {
   switch (block.kind) {
     case "steps":
@@ -41,8 +65,67 @@ function Block({ block }) {
     case "heading":
       return <h2 className="content-heading">{block.text}</h2>;
 
+    case "list":
+      return (
+        <div className="hlist">
+          {block.items.map((text, i) => (
+            <div className="hlist-item" key={i}>
+              <span className="hlist-dash">–</span>
+              <span>{text}</span>
+            </div>
+          ))}
+        </div>
+      );
+
     case "info":
       return <div className="info-card">{block.text}</div>;
+
+    case "memo":
+      return <div className="memo-box">{block.text}</div>;
+
+    case "flow":
+      // 위에서 아래로 이어지는 절차 흐름도
+      // items: [{ icon, name, desc }]
+      return (
+        <div className="flow">
+          {block.items.map((step, i) => (
+            <div className="flow-step" key={i}>
+              <div className="flow-rail">
+                <div className="flow-icon">
+                  <i className={`ti ti-${step.icon || "circle"}`} aria-hidden="true" />
+                </div>
+                {i < block.items.length - 1 && <div className="flow-line" />}
+              </div>
+              <div className="flow-main">
+                <div className="flow-name">
+                  {i + 1}. {step.name}
+                </div>
+                {step.desc && <div className="flow-desc">{step.desc}</div>}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+
+    case "cards":
+      // 아이콘 + 제목 + 회색 설명 박스 카드들
+      // items: [{ icon, title, text }]
+      return (
+        <div className="icards">
+          {block.items.map((card, i) => (
+            <div className="icard" key={i}>
+              <div className="icard-head">
+                <i
+                  className={`ti ti-${card.icon || "square"} icard-icon`}
+                  aria-hidden="true"
+                />
+                <span className="icard-title">{card.title}</span>
+              </div>
+              {card.text && <div className="icard-body">{card.text}</div>}
+            </div>
+          ))}
+        </div>
+      );
 
     case "org":
       return (
@@ -61,7 +144,7 @@ function Block({ block }) {
           </div>
           {block.duty && (
             <>
-              {/* <div className="org-duty-label">주요 수행업무</div> */}
+              <div className="org-duty-label">주요 수행업무</div>
               <div className="org-duty">{block.duty}</div>
             </>
           )}
@@ -95,7 +178,7 @@ function Block({ block }) {
         </div>
       );
     }
-    // faqs 수정
+
     case "faqs":
       return (
         <div>
@@ -103,7 +186,7 @@ function Block({ block }) {
             <FaqItem q={item.q} a={item.a} key={i} />
           ))}
         </div>
-  );
+      );
 
     default:
       return null;
@@ -122,29 +205,5 @@ export default function Content({ pageId }) {
       {page.blocks &&
         page.blocks.map((block, i) => <Block block={block} key={i} />)}
     </main>
-  );
-}
-
-//faq 질문 
-function FaqItem({ q, a }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="faq-acc">
-      <button
-        className={`faq-acc-q ${open ? "open" : ""}`}
-        onClick={() => setOpen((v) => !v)}
-      >
-        <span>
-          <span className="faq-q-mark">Q.</span>
-          {q}
-        </span>
-        <i className="ti ti-chevron-down" aria-hidden="true" />
-      </button>
-      <div className={`faq-acc-a-wrap ${open ? "open" : ""}`}>
-        <div className="faq-acc-a-inner">
-          <div className="faq-acc-a">{a}</div>
-        </div>
-      </div>
-    </div>
   );
 }
