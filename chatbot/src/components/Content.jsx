@@ -83,6 +83,58 @@ function Block({ block }) {
     case "memo":
       return <div className="memo-box">{block.text}</div>;
 
+    case "payflow":
+      // 가로 납부 흐름도 (노드 사이에 화살표)
+      // items: [{ icon, name, desc }]
+      return (
+        <div className="payflow">
+          {block.items.map((node, i) => (
+            <div className="pf-row" key={i}>
+              <div className="pf-node">
+                <div className="pf-ic">
+                  <i className={`ti ti-${node.icon || "circle"}`} aria-hidden="true" />
+                </div>
+                <div className="pf-name">{node.name}</div>
+                {node.desc && <div className="pf-desc">{node.desc}</div>}
+              </div>
+              {i < block.items.length - 1 && (
+                <div className="pf-arrow">
+                  <i className="ti ti-arrow-right" aria-hidden="true" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+
+    case "table":
+      // 표. headers: ["열1","열2"], rows: [["a","b"], ["c","d"]]
+      return (
+        <div className="tbl">
+          {block.caption && <div className="tbl-caption">{block.caption}</div>}
+          <table>
+            {block.headers && (
+              <thead>
+                <tr>
+                  {block.headers.map((h, i) => (
+                    <th key={i}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+            )}
+            <tbody>
+              {block.rows.map((row, ri) => (
+                <tr key={ri}>
+                  {row.map((cell, ci) => (
+                    <td key={ci}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+
     case "flow":
       // 위에서 아래로 이어지는 절차 흐름도
       // items: [{ icon, name, desc }]

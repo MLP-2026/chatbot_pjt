@@ -693,3 +693,111 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- 가로 납부 흐름도 ---------- */
+.payflow {
+  margin-top: 16px;
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+}
+.pf-row {
+  display: contents;
+}
+.pf-node {
+  flex: 1;
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 8px;
+  text-align: center;
+  background: var(--bg-primary);
+  min-width: 0;
+}
+.pf-ic {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin: 0 auto 8px;
+}
+.pf-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.pf-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.pf-arrow {
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ---------- 표 ---------- */
+.tbl {
+  margin-top: 14px;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 12.5px;
+}
+.tbl-caption {
+  background: var(--bg-secondary);
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 0.5px solid var(--border);
+}
+.tbl table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tbl th,
+.tbl td {
+  padding: 8px 10px;
+  text-align: center;
+  border: 0.5px solid var(--border);
+}
+.tbl thead th {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+.tbl td {
+  color: var(--text-secondary);
+}
+.tbl tbody td:first-child {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .payflow {
+    flex-direction: column;
+  }
+  .pf-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pf-node {
+    width: 100%;
+  }
+  .pf-arrow {
+    transform: rotate(90deg);
+    padding: 4px 0;
+  }
+}
